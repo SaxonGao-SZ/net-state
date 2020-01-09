@@ -1,0 +1,28 @@
+{
+  "name": "net-state",
+  "version": "1.0.0",
+  "description": "用于检测web小程序设备是否在线,以及监听网络状态变化",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "none"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaxonGao-SZ/net-state.git"
+  },
+  "keywords": [
+    "net",
+    "net",
+    "state",
+    "change"
+  ],
+  "author": "saxongao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SaxonGao-SZ/net-state/issues"
+  },
+  "homepage": "https://github.com/SaxonGao-SZ/net-state#readme",
+  "devDependencies": {
+    "rollup": "^1.29.0"
+  }
+}
