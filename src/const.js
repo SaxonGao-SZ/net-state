@@ -1,0 +1,1 @@
+export const IS_IN_WXMP = (typeof wx === "object" && typeof wx.base64ToArrayBuffer === 'function') ? true : false;
