@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script src="./dist/net-state.js"></script>
+        <script>
+            var ns = new NetState(false, (param)=>{
+                console.log(param);
+            });
+            var onOnLineHandler = function (param) {
+                console.log(param);
+            }
+            var onOffLineHandler = function (param) {
+                console.log(param);
+            }
+            ns.on(ns.EVENT.ONLINE, onOnLineHandler, this);
+            ns.on(ns.EVENT.OFFLINE, onOnLineHandler, this);
+        </script>
+    </body>
+</html>
