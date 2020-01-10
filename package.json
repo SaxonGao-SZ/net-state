@@ -4,7 +4,8 @@
   "description": "用于检测web小程序设备是否在线,以及监听网络状态变化",
   "main": "./src/index.js",
   "scripts": {
-    "test": "none"
+    "dev": " node_modules/.bin/rollup -c  build/rollup.dev.js -w",
+    "server": "node_modules/.bin/webserver 8888 ./"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,15 @@
   },
   "homepage": "https://github.com/SaxonGao-SZ/net-state#readme",
   "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
     "rollup": "^1.29.0",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-watch": "^4.3.1"
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-watch": "^4.3.1",
+    "webserver": "^4.0.2"
+  },
+  "dependencies": {
+    "core-js": "^3.6.2"
   }
 }
