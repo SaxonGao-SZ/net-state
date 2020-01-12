@@ -261,68 +261,21 @@
             console.error(err);
           }
         });
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = handlers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var handler = _step.value;
-
-            try {
-              handler[1](arguments);
-            } catch (err) {
-              console.error(err);
-            }
-          }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-              _iterator["return"]();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
       }
     }, {
       key: "_onOffline",
       value: function _onOffline() {
+        var _arguments2 = arguments;
+
         var handlers = this._handlers.get(this.EVENT.OFFLINE);
 
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
-
-        try {
-          for (var _iterator2 = handlers[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-            var handler = _step2.value;
-
-            try {
-              handler(arguments);
-            } catch (err) {
-              console.error(err);
-            }
-          }
-        } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
-        } finally {
+        handlers.forEach(function (value, key, map) {
           try {
-            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-              _iterator2["return"]();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
+            value(_arguments2);
+          } catch (err) {
+            console.error(err);
           }
-        }
+        });
       }
     }, {
       key: "onLine",

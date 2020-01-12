@@ -90,24 +90,17 @@ export default class NetState {
                 console.error(err);
             }
         });
-        for (let handler of handlers) {
-            try{
-                handler[1](arguments);
-            } catch (err) {
-                console.error(err);
-            }
-        }
     }
 
     _onOffline() {
         const handlers = this._handlers.get(this.EVENT.OFFLINE);
-        for (let handler of handlers) {
-            try{
-                handler(arguments);
+        handlers.forEach((value, key, map)=>{
+            try {
+                value(arguments);
             } catch (err) {
                 console.error(err);
             }
-        }
+        });
     }
 }
 window.NetState = NetState;
