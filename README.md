@@ -14,7 +14,7 @@
     <body>
         <script src="./dist/net-state.js"></script>
         <script>
-            var ns = new NetState(false, (param)=>{
+            var ns = new NetState(false, (param) => {
                 console.log('ready: ', param);
             });
             var onOnLineHandler = function (param) {
@@ -37,7 +37,9 @@
 - OS : Ubuntu 
 - Browser : Chromuim 79
 
-![WEB端测试](README.assets/Peek 2020-01-12 12-13.gif)
+![WEB 效果](./README.assets/Peek 2020-01-12 12-13-1578824396873.gif)
+
+
 
 
 
