@@ -32,3 +32,12 @@
 </html>
 ```
 
+# Test
+
+- OS : Ubuntu 
+- Browser : Chromuim 79
+
+![WEB端测试](README.assets/Peek 2020-01-12 12-13.gif)
+
+
+
