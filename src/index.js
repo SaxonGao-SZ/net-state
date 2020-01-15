@@ -26,7 +26,7 @@ export default class NetState {
     }
 
     _ready() {
-        this._triggerReady(arguments);
+        this._triggerReady([...arguments]);
     }
 
     _triggerReady () {
@@ -40,8 +40,8 @@ export default class NetState {
     }
 
     // 立即获取在线状态，注意：小程序下非同步
-    get onLine () {
-        return this._static.isOnLine;
+    isOnLine () {
+        return this._static.isOnLine();
     }
 
     on (eventName, handler, context=undefined) {
@@ -61,7 +61,7 @@ export default class NetState {
         }
         let safeHandler = function() {
             try {
-                handler.apply(context, arguments)
+                handler.apply(context, [...arguments])
             } catch (err) {
                 console.log(err);
             }
@@ -85,7 +85,7 @@ export default class NetState {
         const handlers = this._handlers.get(this.EVENT.ONLINE);
         handlers.forEach((value, key, map)=>{
             try {
-                value(arguments);
+                value([...arguments]);
             } catch (err) {
                 console.error(err);
             }
