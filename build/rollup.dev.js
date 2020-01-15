@@ -17,13 +17,15 @@ var wOptions = {
         }
       ]
     })
-],
-  output: {
-    name: 'net-state',
-    file: 'dist/net-state.js',
-    format: 'umd',
-    sourceMap: 'inline',
-  },  
+  ],
+  output: [
+    {
+      name: 'net-state',
+      file: 'dist/net-state.js',
+      format: 'umd',
+      sourceMap: 'inline',
+    },
+  ],  
   watch: {
     include: 'src/**'
   }

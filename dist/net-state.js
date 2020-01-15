@@ -40,6 +40,26 @@
     return Constructor;
   }
 
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+      return arr2;
+    }
+  }
+
+  function _iterableToArray(iter) {
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  }
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  }
+
   var IS_IN_WXMP = (typeof wx === "undefined" ? "undefined" : _typeof(wx)) === "object" && typeof wx.base64ToArrayBuffer === 'function' ? true : false;
 
   var StaticState =
@@ -48,13 +68,50 @@
     function StaticState(readyHandle) {
       _classCallCheck(this, StaticState);
 
-      this._isOnLine = false;
       this._readyHandle = readyHandle;
 
       this._checkOnline();
     }
 
     _createClass(StaticState, [{
+      key: "isOnLine",
+      value: function isOnLine() {
+        if (IS_IN_WXMP) {
+          return this._isOnLineWX();
+        }
+
+        return this._isOnLineWeb();
+      }
+    }, {
+      key: "_isOnLineWeb",
+      value: function _isOnLineWeb() {
+        return new Promise(function (resolve, reject) {
+          resolve(window.navigator.onLine);
+        });
+      }
+    }, {
+      key: "_isOnLineWX",
+      value: function _isOnLineWX() {
+        var _this = this;
+
+        return new Promise(function (resolve, reject) {
+          wx.getNetworkType({
+            success: function success(res) {
+              _this._isOnLine = res.networkType === 'none' ? false : true;
+              resolve({
+                isOnLine: _this._isOnLine
+              });
+            },
+            fail: function fail(res) {
+              _this._isOnLine = false;
+              reject({
+                isOnLine: _this._isOnLine
+              });
+            }
+          });
+        });
+      }
+    }, {
       key: "_checkOnline",
       value: function _checkOnline() {
         if (IS_IN_WXMP) {
@@ -68,13 +125,13 @@
     }, {
       key: "_checkOnLineWX",
       value: function _checkOnLineWX() {
-        var _this = this;
+        var _this2 = this;
 
         wx.getNetworkType({
           success: function success(res) {
-            _this._isOnLine = res.networkType === 'none' ? false : true;
+            _this2._isOnLine = res.networkType === 'none' ? false : true;
 
-            _this._readyHandle();
+            _this2._readyHandle();
           }
         });
       }
@@ -84,11 +141,6 @@
         this._isOnLine = window.navigator.onLine;
 
         this._readyHandle();
-      }
-    }, {
-      key: "isOnLine",
-      get: function get() {
-        return this._isOnLine;
       }
     }]);
 
@@ -187,7 +239,7 @@
     }, {
       key: "_ready",
       value: function _ready() {
-        this._triggerReady(arguments);
+        this._triggerReady(Array.prototype.slice.call(arguments));
       }
     }, {
       key: "_triggerReady",
@@ -201,6 +253,11 @@
         }
       } // 立即获取在线状态，注意：小程序下非同步
 
+    }, {
+      key: "isOnLine",
+      value: function isOnLine() {
+        return this._static.isOnLine();
+      }
     }, {
       key: "on",
       value: function on(eventName, handler) {
@@ -224,7 +281,7 @@
 
         var safeHandler = function safeHandler() {
           try {
-            handler.apply(context, arguments);
+            handler.apply(context, Array.prototype.slice.call(arguments));
           } catch (err) {
             console.log(err);
           }
@@ -256,7 +313,7 @@
 
         handlers.forEach(function (value, key, map) {
           try {
-            value(_arguments);
+            value(_toConsumableArray(_arguments));
           } catch (err) {
             console.error(err);
           }
@@ -276,11 +333,6 @@
             console.error(err);
           }
         });
-      }
-    }, {
-      key: "onLine",
-      get: function get() {
-        return this._static.isOnLine;
       }
     }]);
 
